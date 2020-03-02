@@ -1,0 +1,37 @@
+/* ------------------------------------------------------------
+Variables
+------------------------------------------------------------ */
+// color
+$color-main-text: #0F0F0F;
+$color-pale-pink: #F2F0EF;
+$color-pink: #faeded;
+$color-brown: #3E2D21;
+$color-light-brown: #573F2E;
+$color-gray: #CCC;
+$color-red: #cd6f67;
+$color-dark-gray: #2e2e2e;
+$color-light-gray: #f7f7f7;
+$color-line-green: #00b900;
+$color-link: #0041AA;
+$color-line-light-green: #33c733;
+
+
+$font: 'Noto Sans', sans-serif;
+
+$unit: 20px;
+$unit-pc: 50px;
+
+// breakpoints
+$breakpoint-xs: 375px !default;
+$breakpoint-sm: 576px !default;
+$breakpoint-md: 768px !default;
+$breakpoint-lg: 992px !default;
+$breakpoint-xl: 1100px !default;
+$breakpoint-xxl: 1500px !default;
+$breakpoints: ('xs': 'screen and (min-width: #{$breakpoint-xs})',
+  'sm': 'screen and (min-width: #{$breakpoint-sm})',
+  'md': 'screen and (min-width: #{$breakpoint-md})',
+  'lg': 'screen and (min-width: #{$breakpoint-lg})',
+  'xl': 'screen and (min-width: #{$breakpoint-xl})',
+  'xxl': 'screen and (min-width: #{$breakpoint-xxl})',
+) !default;

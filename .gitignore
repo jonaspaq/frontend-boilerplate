@@ -1,1 +1,5 @@
+npm-debug.log
 node_modules
+html/assets/css/
+html/assets/js/
+html/*.html

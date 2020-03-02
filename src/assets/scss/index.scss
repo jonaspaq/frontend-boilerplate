@@ -1,0 +1,39 @@
+/*!
+Theme Name: ''
+Author: ''
+Author URI:
+Description: Theme for ''
+Version: 1.0
+*/
+@charset "UTF-8";
+
+/*--------------------------------
+  THIS SCSS IS FOR TESTING PURPOSE
+  PLEASE COMMENT OR REMOVE THIS LINE BEFORE UPLOADING TO LIVE SERVER
+--------------------------------*/
+
+
+/*--------------------------------
+  Base Settings
+--------------------------------*/
+/* Note: Don't change the order of base settings if you don't know
+  what you are doing */
+
+@import 'foundation/base/fonts',
+'foundation/base/resetcss',
+'foundation/base/variables',
+'foundation/base/mixin',
+'foundation/base/reset';
+
+
+/*--------------------------------
+  Layout
+--------------------------------*/
+
+
+
+/*--------------------------------
+  Object
+--------------------------------*/
+
+@import 'object/object';

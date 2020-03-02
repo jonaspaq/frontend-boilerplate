@@ -1,13 +1,29 @@
 {
+  "version": "1.0.0",
+  "main": "gulpfile.js",
   "scripts": {
+    "lint": "sass-lint -v",
+    "lint:fix": "sass-lint-auto-fix -c ./.sasslintautofix.json ./src/assets/scss/**/*.scss",
     "gulp": "gulp"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NexSeed/kuwasan-kouyaren.git"
+  },
+  "sasslintConfig": ".sass-lint.yml",
+  "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.26.7",
-    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
     "gulp-imagemin": "^7.1.0",
-    "gulp-minify": "^3.1.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-pug": "^4.0.1",
     "gulp-sass": "^4.0.2",
-    "node-sass": "^4.13.1"
+    "sass-lint": "^1.13.1",
+    "sass-lint-auto-fix": "^0.21.0"
+  },
+  "dependencies": {
+    "gulp": "^4.0.2"
   }
 }

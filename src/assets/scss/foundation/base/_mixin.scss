@@ -1,0 +1,35 @@
+
+
+// Default media queries, please refer to _variable.scss
+@mixin mq($breakpoint) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $breakpoint) {
+    // Prints a media query based on the value
+    @media #{inspect(map-get($breakpoints, $breakpoint))} {
+      @content;
+    }
+  } @else { // If the key doesn't exist in the map
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+    + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+// Custom media query
+// This should be used ONLY on specific elements that the styling is difficult to adjust.
+@mixin cq($query) {
+  @media only screen and (min-width: $query) {
+    @content;
+  }
+}
+
+// create icons
+@mixin icons($width, $num, $pos) {
+  background: url('../images/common/icons-2.png') #{-($pos)*$width} bottom / #{$num*$width} auto no-repeat;
+}
+@mixin icons2($width, $num, $pos) {
+  background: url('../images/common/icons-3.png') #{-($pos)*$width} bottom / #{$num*$width} auto no-repeat;
+}
+
+// create icons
+@mixin subjectIcons($width, $num, $pos) {
+  background: url('../images/common/subject-icon.png') #{$pos /($num - 1) * 100%} bottom / #{$num*$width} auto no-repeat;
+}

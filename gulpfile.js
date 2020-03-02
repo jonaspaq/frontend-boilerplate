@@ -1,64 +1,52 @@
+// **********************************************
+// require
+// **********************************************
+const $ = require('./gulp/plugin')
+const conf = require('./gulp/config')
+const { bs } = require("./gulp/tasks/bs")
+const { style } = require("./gulp/tasks/style")
+const { html } = require("./gulp/tasks/html")
+const { js } = require("./gulp/tasks/js")
+const { imgMin } = require("./gulp/tasks/imgMin")
 
-const gulp = require('gulp');
-const sass = require('gulp-sass');
-const JSminify = require('gulp-minify');
-const imagemin = require('gulp-imagemin');
-const browserSync = require('browser-sync').create();
- 
-sass.compiler = require('node-sass');
-
-// Html
-gulp.task('html', function(){
-    return gulp.src('./src/*.html')
-    .pipe(gulp.dest('./dist/'))
-})
-
-// Scss compilation
-gulp.task('scss', function () {
-    return gulp.src('./src/assets/css/style.scss')
-    .pipe(sass({
-        outputStyle: 'compressed'
-    }).on('error', gulp.series(gulp.task('scss')), sass.logError))
-    .pipe(gulp.dest('./dist/assets/css/'))
-});
-
-// JS minify
-gulp.task('js:minify', function() {
-    return gulp.src('./src/assets/js/main.js')
-      .pipe(JSminify())
-      .pipe(gulp.dest('./dist/assets/js/'))
-});
-
-// JS watch
-gulp.task('watch:js', function(){
-    gulp.watch('./src/assets/js/**/*.js').on('change', gulp.series('js:minify', browserSync.reload))
-});
-
-// Watch Scss
-gulp.task('watch:scss', function(){
-    gulp.watch('src/assets/css/**/*.scss').on('change', gulp.series('scss', browserSync.reload))
-});
-
-// Image minify
-gulp.task('imagemin', function(){
-    return gulp.src('src/assets/images/*')
-        .pipe(imagemin()).on('error', gulp.series(gulp.task('imagemin')), imagemin.logError)
-        .pipe(gulp.dest('dist/assets/images'))
-})
-
-// Browser Sync
-gulp.task('serve', function() {
-    browserSync.init({
-        server: {
-            baseDir: "./dist",
-            browsers: ['*']
-        }
-    });
-
-    // Watch these directories
-    gulp.watch("src/assets/images/**/*.*").on('change', gulp.series('imagemin', browserSync.reload));
-    gulp.watch("src/*.html").on('change', gulp.series('html', browserSync.reload));
-});
+// // **********************************************
+// // task set
+// // **********************************************
 
 
-gulp.task('default', gulp.parallel('html', 'scss', 'js:minify', 'watch:js', 'watch:scss', 'imagemin', 'serve'))
+// watch src directory
+function watchProject(done) {
+    // Source images Files
+    $.gulp.watch([conf.srcDir.imgs + '*'], imgMin)
+    // Scss
+    $.gulp.watch([conf.srcDir.scss + '**.scss', conf.srcDir.scss + '**/*.scss', conf.srcDir.scss + '**/**/**.scss', conf.srcDir.scss + '**/**/**/**.scss'], style.compileScss)
+    // Pug
+    $.gulp.watch(['src/**.pug', 'src/*/**.pug'], html)
+    // Scripts
+    $.gulp.watch([conf.srcDir.js + '**.js', conf.srcDir.js + '*/**.js'], js.compileJS)
+
+    done()
+}
+
+// Gulp task for development local
+$.gulp.task('default',
+    $.gulp.series(
+        imgMin,
+        bs.syncBrowser,
+        style.compileScss,
+        js.compileJS,
+        html,
+        watchProject,
+    )
+)
+
+// Gulp task build for CI
+// Can also be used for production
+$.gulp.task('buildCI',
+    $.gulp.series(
+        imgMin,
+        style.compileScss,
+        js.compileJS,
+        html
+    )
+)
