@@ -13,7 +13,7 @@
   "sasslintConfig": ".sass-lint.yml",
   "license": "ISC",
   "devDependencies": {
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.27.10",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-imagemin": "^7.1.0",
     "gulp-notify": "^3.2.0",
